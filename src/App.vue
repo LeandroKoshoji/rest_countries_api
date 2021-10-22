@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Header :theme="theme" @toggle-theme="toggleTheme()"/>
-    <router-view/>
+    <router-view :theme="theme"/>
   </div>
 </template>
 
