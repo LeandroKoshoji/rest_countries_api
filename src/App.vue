@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Header :theme="theme" @toogle-theme="toogleTheme()"/>
+    <Header :theme="theme" @toggle-theme="toggleTheme()"/>
     <router-view/>
   </div>
 </template>
@@ -16,7 +16,7 @@ export default {
     }
   },
   methods: {
-    toogleTheme(){
+    toggleTheme(){
       const theme = this.theme === 'light' ? 'dark' : 'light'
       this.theme = theme
 
