@@ -22,7 +22,7 @@ export default {
         theme: {
             type: String,
             require: true,
-            default: 'dark'
+            default: 'light'
         }
     },
     methods: {
@@ -42,11 +42,11 @@ header {
     box-shadow: var(--box-shadow);
 
     &.light {
-        background-color: var(--clr-light-bg);
+        background-color: var(--clr-light-primary);
         color:var(--clr-light -text)
     }
     &.dark {
-        background-color: var(--clr-dark-bg);
+        background-color: var(--clr-dark-primary);
         color:var(--clr-dark-text)
     }
 
