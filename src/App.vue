@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Header/>
+    <Header :theme="theme" @toogle-theme="toogleTheme()"/>
     <router-view/>
   </div>
 </template>
@@ -9,7 +9,25 @@
 import Header from './components/Header.vue'
 
 export default {
-  components: { Header }
+  components: { Header },
+  data () {
+    return {
+      theme: null
+    }
+  },
+  methods: {
+    toogleTheme(){
+      const theme = this.theme === 'light' ? 'dark' : 'light'
+      this.theme = theme
+
+      localStorage.setItem('theme', theme)
+    }
+  },
+  created() {
+    const hasThemeStorage = Boolean(localStorage.getItem('theme'))
+        
+    this.theme = hasThemeStorage ? localStorage.getItem('theme') : 'light'
+  }
 }
 </script>
 
