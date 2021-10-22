@@ -6,7 +6,7 @@
                    <h1>Where in the world?</h1>
                </router-link>
 
-               <div class="theme-switcher">
+               <div class="theme-switcher" @click="toogleTheme()">
                 <i :class="theme === 'light' ? 'far fa-moon' : 'fas fa-moon'"></i>
                 <span class="theme-text">Dark Mode</span>
                </div>
@@ -23,6 +23,11 @@ export default {
             type: String,
             require: true,
             default: 'dark'
+        }
+    },
+    methods: {
+        toogleTheme() {
+            this.$emit('toogle-theme')
         }
     }
 }
