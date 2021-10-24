@@ -25,7 +25,7 @@ export default {
 
 <style lang="scss" scoped>
 .card {
-    width: 265px;
+    width: 263px;
     height: 340px;
     border-radius: 5px;
     overflow: hidden;
