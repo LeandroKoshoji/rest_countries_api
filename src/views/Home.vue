@@ -1,37 +1,37 @@
 <template>
   <div class="home" :class="theme">
     <div class="container">
-      <Searchers :theme="theme"/>
+      <Searchers :theme="theme" />
       <div class="cards-container">
-        <Card :theme="theme"/>
-        <Card :theme="theme"/>
-        <Card :theme="theme"/>
-        <Card :theme="theme"/>
-        <Card :theme="theme"/>
-        <Card :theme="theme"/>
-        <Card :theme="theme"/>
-        <Card :theme="theme"/>
-        <Card :theme="theme"/>
-        <Card :theme="theme"/>
+        <Card :theme="theme" />
+        <Card :theme="theme" />
+        <Card :theme="theme" />
+        <Card :theme="theme" />
+        <Card :theme="theme" />
+        <Card :theme="theme" />
+        <Card :theme="theme" />
+        <Card :theme="theme" />
+        <Card :theme="theme" />
+        <Card :theme="theme" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import Searchers from '../components/Searchers.vue'
-import Card from '../components/Card.vue'
+import Searchers from "../components/Searchers.vue";
+import Card from "../components/Card.vue";
 export default {
-  name: 'Home',
+  name: "Home",
   components: { Searchers, Card },
   props: {
     theme: {
-            type: String,
-            require: true,
-            default: 'light'
-        }
-  }
-}
+      type: String,
+      require: true,
+      default: "light",
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
