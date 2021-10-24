@@ -1,17 +1,18 @@
 <template>
-  <router-link :to="`/details/${'123'}`">
+  <router-link :to="`/details/${country.alpha3Code}`">
     <div class="card" :class="theme">
-      <img
-        src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Flag_of_the_Taliban.svg"
-        alt="Taliban"
-      />
+      <img :src="country.flag" :alt="`${country.name} flag`" />
       <div class="card__descriptions">
-        <h3 class="card__descriptions__title">Afeganistão</h3>
+        <h3 class="card__descriptions__title">{{ country.name }}</h3>
         <p class="card__descriptions__info">
-          <strong>Population:</strong> 38928341
+          <strong>Population:</strong> {{ country.population }}
         </p>
-        <p class="card__descriptions__info"><strong>Region:</strong> Asia</p>
-        <p class="card__descriptions__info"><strong>Capital:</strong> Kabul</p>
+        <p class="card__descriptions__info">
+          <strong>Region:</strong> {{ country.region }}
+        </p>
+        <p class="card__descriptions__info">
+          <strong>Capital:</strong> {{ country.capital }}
+        </p>
       </div>
     </div>
   </router-link>
@@ -25,6 +26,10 @@ export default {
       type: String,
       require: true,
       default: "light",
+    },
+    country: {
+      type: Object,
+      require: true,
     },
   },
 };
