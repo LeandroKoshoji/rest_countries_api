@@ -29,6 +29,7 @@ export default {
     const hasThemeStorage = Boolean(localStorage.getItem('theme'))
         
     this.theme = hasThemeStorage ? localStorage.getItem('theme') : 'light'
+    
     this.FETCH_COUNTRIES()
   }
 
