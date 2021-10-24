@@ -9,32 +9,32 @@
       <div class="country-container">
         <img
           class="country-flag"
-          src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Flag_of_the_Taliban.svg"
-          alt="Taliba"
+          :src="country.flags.svg"
+          :alt="`${country.name} flag`"
         />
         <div class="country__details">
-          <h3 class="country__details__title">Afeganistão</h3>
+          <h3 class="country__details__title">{{country.name}}</h3>
           <div class="country__details__infos">
             <div class="left">
-              <p><strong>Native Language:</strong> Salahh</p>
-              <p><strong>Populations:</strong> 1234567</p>
-              <p><strong>Region:</strong> Asia</p>
-              <p><strong>Sub-Region:</strong> xpto</p>
-              <p><strong>Capital:</strong> Kabul</p>
+              <p><strong>Native Name:</strong> {{country.nativeName}}</p>
+              <p><strong>Populations:</strong> {{country.population}}</p>
+              <p><strong>Region:</strong> {{country.region}}</p>
+              <p><strong>Sub-Region:</strong> {{country.subregion}}</p>
+              <p><strong>Capital:</strong> {{country.capital}}</p>
             </div>
             <div class="right">
-              <p><strong>Top Level Domain:</strong> .ks</p>
-              <p><strong>Currencies:</strong> Euro</p>
-              <p><strong>Languages:</strong> Salah</p>
+              <p><strong>Top Level Domain:</strong> {{country.topLevelDomain.join()}}</p>
+              <p><strong>Currencies:</strong> {{country.currencies.map(c => c.name).join()}}</p>
+              <p><strong>Languages:</strong> {{country.languages.map(l => l.name).join()}}</p>
             </div>
           </div>
           <div class="country__details__borders">
             <span><strong>Border Countries: </strong></span>
-            <router-link :to="`/details/${'france'}`"
-              ><span class="border-tag" :class="theme"
-                >France</span
-              ></router-link
-            >
+            <span class="border-tag" :class="theme" v-for="borderCountry in country.borders" :key="borderCountry">
+              <router-link :to="`/details/${borderCountry}`">
+              {{borderCountry}}
+              </router-link>
+            </span>
           </div>
         </div>
       </div>
@@ -43,6 +43,7 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 export default {
   name: "Details",
   props: {
@@ -52,6 +53,20 @@ export default {
       default: "light",
     },
   },
+  computed: {
+    ...mapGetters(['country'])
+  },
+  methods: {
+    ...mapActions(['FETCH_COUNTRY_BY_NAME'])
+  },
+  created() {
+    this.FETCH_COUNTRY_BY_NAME(this.$route.params.id)
+  },
+  watch: {
+    $route() {
+      this.FETCH_COUNTRY_BY_NAME(this.$route.params.id)
+    }
+  }
 };
 </script>
 

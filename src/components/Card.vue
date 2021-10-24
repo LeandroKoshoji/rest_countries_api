@@ -1,7 +1,7 @@
 <template>
   <router-link :to="`/details/${country.alpha3Code}`">
     <div class="card" :class="theme">
-      <img :src="country.flag" :alt="`${country.name} flag`" />
+      <img :src="country.flags.svg" :alt="`${country.name} flag`" />
       <div class="card__descriptions">
         <h3 class="card__descriptions__title">{{ country.name }}</h3>
         <p class="card__descriptions__info">
