@@ -7,6 +7,7 @@
 
 <script>
 import Header from './components/Header.vue'
+import { mapActions }from 'vuex'
 
 export default {
   components: { Header },
@@ -16,6 +17,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['FETCH_COUNTRIES']),
     toggleTheme(){
       const theme = this.theme === 'light' ? 'dark' : 'light'
       this.theme = theme
@@ -27,7 +29,9 @@ export default {
     const hasThemeStorage = Boolean(localStorage.getItem('theme'))
         
     this.theme = hasThemeStorage ? localStorage.getItem('theme') : 'light'
+    this.FETCH_COUNTRIES()
   }
+
 }
 </script>
 
