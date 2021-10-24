@@ -3,16 +3,7 @@
     <div class="container">
       <Searchers :theme="theme" />
       <div class="cards-container">
-        <Card :theme="theme" />
-        <Card :theme="theme" />
-        <Card :theme="theme" />
-        <Card :theme="theme" />
-        <Card :theme="theme" />
-        <Card :theme="theme" />
-        <Card :theme="theme" />
-        <Card :theme="theme" />
-        <Card :theme="theme" />
-        <Card :theme="theme" />
+        <Card :theme="theme" v-for="country in filteredCountries" :key="country.alpha3Code" :country="country"/>
       </div>
     </div>
   </div>
@@ -21,6 +12,7 @@
 <script>
 import Searchers from "../components/Searchers.vue";
 import Card from "../components/Card.vue";
+import { mapGetters } from 'vuex'
 export default {
   name: "Home",
   components: { Searchers, Card },
@@ -31,6 +23,9 @@ export default {
       default: "light",
     },
   },
+  computed: {
+    ...mapGetters(['filteredCountries'])
+  }
 };
 </script>
 
