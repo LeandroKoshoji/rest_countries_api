@@ -41,6 +41,9 @@ export default new Vuex.Store({
     },
     country (state) {
       return state.country
+    },
+    loading (state) {
+      return state.loading
     }
   },
   mutations: {
