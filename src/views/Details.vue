@@ -9,7 +9,7 @@
       <div class="country-container">
         <img
           class="country-flag"
-          :src="country.flags.svg"
+          :src="country.flag"
           :alt="`${country.name} flag`"
         />
         <div class="country__details">
