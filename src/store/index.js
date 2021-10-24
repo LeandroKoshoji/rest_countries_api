@@ -9,17 +9,47 @@ export default new Vuex.Store({
     country: [],
     error: null,
     errorMessage: null,
-    loading: null
+    loading: null,
+    query: '',
+    filter: ''
   },
   getters: {
     filteredCountries (state) {
-      return state.countries
+      const allCountries = state.countries
+      const query = state.query.toLowerCase().trim()
+      const filter = state.filter.toLowerCase().trim()
+
+      if(filter && query) {
+        const filteredCountries = allCountries.filter(country => 
+          country.region.toLowerCase().match(filter))
+
+        return filteredCountries.filter(fc => 
+          fc.name.toLowerCase().includes(query))
+      }
+      if(query) {
+        return allCountries.filter(country => 
+          country.name.toLowerCase().includes(query))
+      }
+      if(filter) {
+        const filteredCountries = allCountries.filter(country => 
+          country.region.toLowerCase().match(filter))
+
+        return filteredCountries
+      }
+
+      return allCountries
     },
     country (state) {
       return state.country
     }
   },
   mutations: {
+    SET_QUERY (state, payload) {
+      state.query = payload
+    },
+    SET_FILTER (state, payload) {
+      state.filter = payload
+    },
     GET_COUNTRIES (state, payload) {
       state.countries = payload
     },
@@ -43,7 +73,6 @@ export default new Vuex.Store({
         const res = await fetch(`https://restcountries.com/v2/all`)
         const data = await res.json()
 
-        console.log(data)
         commit('GET_COUNTRIES', data)
       } catch (e){
         commit('GET_ERROR', true)
@@ -58,7 +87,6 @@ export default new Vuex.Store({
         const res = await fetch(`https://restcountries.com/v2/alpha/${code}`)
         const data = await res.json()
 
-        console.log(data)
         commit('GET_COUNTRY', data)
       } catch (e) {
         commit('GET_ERROR', true)
