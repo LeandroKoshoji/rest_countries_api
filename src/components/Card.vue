@@ -38,7 +38,7 @@ export default {
 <style lang="scss" scoped>
 .card {
   width: 263px;
-  height: 340px;
+  min-height: 340px;
   border-radius: 5px;
   overflow: hidden;
   box-shadow: var(--box-shadow);
