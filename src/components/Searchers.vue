@@ -9,14 +9,15 @@
             id="search"
             class="search"
             :class="theme"
+            v-model="query"
           />
         </div>
     </form>
     <div class="filter-container" :class="theme">
-      <select name="region" id="region" :class="theme">
+      <select name="region" id="region" :class="theme" v-model="filter">
         <option value="" selected>Filter by region</option>
-        <option value="África">África</option>
-        <option value="Américas">Américas</option>
+        <option value="Africa">África</option>
+        <option value="Americas">Américas</option>
         <option value="Asia">Asia</option>
         <option value="Europe">Europe</option>
         <option value="Oceania">Oceania</option>
@@ -36,6 +37,24 @@ export default {
       default: "light",
     },
   },
+  computed: {
+    query: {
+      get(){
+        return this.$store.state.query
+      },
+      set(value) {
+        this.$store.commit('SET_QUERY', value)
+      }
+    },
+    filter: {
+      get(){
+        return this.$store.state.filter
+      },
+      set(value) {
+        this.$store.commit('SET_FILTER', value)
+      }
+    }
+  }
 };
 </script>
 
@@ -114,6 +133,15 @@ export default {
       outline: none;
       padding: 1rem;
       font-size: 1rem;
+
+      &.light {
+      background-color: var(--clr-light-primary);
+      color: var(--clr-light -text);
+    }
+    &.dark {
+      background-color: var(--clr-dark-primary);
+      color: var(--clr-dark-text);
+    }
 
       &.dark {
         color: var(--clr-dark-text);
