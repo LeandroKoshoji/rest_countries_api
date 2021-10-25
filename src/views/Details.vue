@@ -5,34 +5,49 @@
         <i class="fas fa-long-arrow-alt-left"></i>
         Back
       </router-link>
-
-      <div class="country-container">
+      <p class="loading" v-if="loading">Loading...</p>
+      <div class="country-container" v-else>
+        
         <img
           class="country-flag"
           :src="country.flag"
           :alt="`${country.name} flag`"
         />
         <div class="country__details">
-          <h3 class="country__details__title">{{country.name}}</h3>
+          <h3 class="country__details__title">{{ country.name }}</h3>
           <div class="country__details__infos">
             <div class="left">
-              <p><strong>Native Name:</strong> {{country.nativeName}}</p>
-              <p><strong>Populations:</strong> {{country.population}}</p>
-              <p><strong>Region:</strong> {{country.region}}</p>
-              <p><strong>Sub-Region:</strong> {{country.subregion}}</p>
-              <p><strong>Capital:</strong> {{country.capital}}</p>
+              <p><strong>Native Name:</strong> {{ country.nativeName }}</p>
+              <p><strong>Populations:</strong> {{ country.population }}</p>
+              <p><strong>Region:</strong> {{ country.region }}</p>
+              <p><strong>Sub-Region:</strong> {{ country.subregion }}</p>
+              <p><strong>Capital:</strong> {{ country.capital }}</p>
             </div>
             <div class="right">
-              <p><strong>Top Level Domain:</strong> {{country.topLevelDomain.join()}}</p>
-              <p><strong>Currencies:</strong> {{country.currencies.map(c => c.name).join()}}</p>
-              <p><strong>Languages:</strong> {{country.languages.map(l => l.name).join()}}</p>
+              <p>
+                <strong>Top Level Domain:</strong>
+                {{ country.topLevelDomain.join() }}
+              </p>
+              <p>
+                <strong>Currencies:</strong>
+                {{ country.currencies.map((c) => c.name).join() }}
+              </p>
+              <p>
+                <strong>Languages:</strong>
+                {{ country.languages.map((l) => l.name).join() }}
+              </p>
             </div>
           </div>
           <div class="country__details__borders">
             <span><strong>Border Countries: </strong></span>
-            <span class="border-tag" :class="theme" v-for="borderCountry in country.borders" :key="borderCountry">
+            <span
+              class="border-tag"
+              :class="theme"
+              v-for="borderCountry in country.borders"
+              :key="borderCountry"
+            >
               <router-link :to="`/details/${borderCountry}`">
-              {{borderCountry}}
+                {{ borderCountry }}
               </router-link>
             </span>
           </div>
@@ -43,7 +58,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters } from "vuex";
 export default {
   name: "Details",
   props: {
@@ -54,19 +69,19 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(['country'])
+    ...mapGetters(["country", "loading"]),
   },
   methods: {
-    ...mapActions(['FETCH_COUNTRY_BY_NAME'])
+    ...mapActions(["FETCH_COUNTRY_BY_NAME"]),
   },
   created() {
-    this.FETCH_COUNTRY_BY_NAME(this.$route.params.id)
+    this.FETCH_COUNTRY_BY_NAME(this.$route.params.id);
   },
   watch: {
     $route() {
-      this.FETCH_COUNTRY_BY_NAME(this.$route.params.id)
-    }
-  }
+      this.FETCH_COUNTRY_BY_NAME(this.$route.params.id);
+    },
+  },
 };
 </script>
 
@@ -174,5 +189,25 @@ export default {
       }
     }
   }
+  @keyframes spin {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.1);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .loading {
+      font-size: 3rem;
+      text-align: center;
+      animation-name: spin;
+      animation-duration: 1000ms;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
+    }
 }
 </style>
