@@ -4,16 +4,22 @@
       <Searchers :theme="theme" />
       <div class="cards-container">
         <p v-if="loading" class="loading">Loading...</p>
-        <Card v-else :theme="theme" v-for="country in filteredCountries" :key="country.alpha3Code" :country="country"/>
+        <Card
+          v-else
+          :theme="theme"
+          v-for="country in filteredCountries"
+          :key="country.alpha3Code"
+          :country="country"
+        />
       </div>
     </div>
   </div>
 </template>
-
+ß
 <script>
 import Searchers from "../components/Searchers.vue";
 import Card from "../components/Card.vue";
-import { mapGetters } from 'vuex'
+import { mapGetters } from "vuex";
 export default {
   name: "Home",
   components: { Searchers, Card },
@@ -25,8 +31,8 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(['filteredCountries', 'loading'])
-  }
+    ...mapGetters(["filteredCountries", "loading"]),
+  },
 };
 </script>
 
@@ -52,9 +58,15 @@ export default {
     justify-content: center;
 
     @keyframes spin {
-      0% {transform: scale(1);}
-      50% {transform: scale(1.2);}
-      100% {transform: scale(1);}
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.2);
+      }
+      100% {
+        transform: scale(1);
+      }
     }
 
     .loading {
@@ -62,7 +74,7 @@ export default {
       animation-name: spin;
       animation-duration: 1000ms;
       animation-iteration-count: infinite;
-      animation-timing-function: linear;  
+      animation-timing-function: linear;
     }
   }
 }
