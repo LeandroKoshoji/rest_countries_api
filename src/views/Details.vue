@@ -7,7 +7,6 @@
       </router-link>
       <p class="loading" v-if="loading">Loading...</p>
       <div class="country-container" v-else>
-        
         <img
           class="country-flag"
           :src="country.flag"
@@ -190,24 +189,24 @@ export default {
     }
   }
   @keyframes spin {
-      0% {
-        transform: scale(1);
-      }
-      50% {
-        transform: scale(1.1);
-      }
-      100% {
-        transform: scale(1);
-      }
+    0% {
+      transform: scale(1);
     }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
 
-    .loading {
-      font-size: 3rem;
-      text-align: center;
-      animation-name: spin;
-      animation-duration: 1000ms;
-      animation-iteration-count: infinite;
-      animation-timing-function: linear;
-    }
+  .loading {
+    font-size: 3rem;
+    text-align: center;
+    animation-name: spin;
+    animation-duration: 1000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+  }
 }
 </style>
