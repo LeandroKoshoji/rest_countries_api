@@ -54,6 +54,10 @@ export default {
         this.$store.commit('SET_FILTER', value)
       }
     }
+  },
+  created() {
+    this.$store.commit('SET_QUERY', '')
+    this.$store.commit('SET_FILTER', '')
   }
 };
 </script>
