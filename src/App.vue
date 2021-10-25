@@ -1,43 +1,31 @@
 <template>
   <div id="app">
-    <Header :theme="theme" @toggle-theme="toggleTheme()"/>
-    <router-view :theme="theme"/>
+    <Header :theme="theme" @toggle-theme="TOGGLE_THEME()" />
+    <router-view :theme="theme" />
   </div>
 </template>
 
 <script>
-import Header from './components/Header.vue'
-import { mapActions }from 'vuex'
+import Header from "./components/Header.vue";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   components: { Header },
-  data () {
-    return {
-      theme: null
-    }
+  computed: {
+    ...mapGetters(["theme"]),
   },
   methods: {
-    ...mapActions(['FETCH_COUNTRIES']),
-    toggleTheme(){
-      const theme = this.theme === 'light' ? 'dark' : 'light'
-      this.theme = theme
-
-      localStorage.setItem('theme', theme)
-    }
+    ...mapActions(["FETCH_COUNTRIES", "TOGGLE_THEME", "SET_INITIAL_THEME"]),
   },
   created() {
-    const hasThemeStorage = Boolean(localStorage.getItem('theme'))
-        
-    this.theme = hasThemeStorage ? localStorage.getItem('theme') : 'light'
-    
-    this.FETCH_COUNTRIES()
-  }
-
-}
+    this.SET_INITIAL_THEME();
+    this.FETCH_COUNTRIES();
+  },
+};
 </script>
 
 <style lang="scss">
-@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;800&display=swap");
 
 :root {
   --clr-dark-bg: #202c37;
@@ -47,14 +35,14 @@ export default {
   --clr-light-primary: #fff;
   --clr-light-text: #000;
 
-  --box-shadow:rgba(0, 0, 0, 0.2) 0px 2px 5px 0px;
+  --box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 5px 0px;
 }
 
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: "Nunito Sans", sans-serif;
 }
 
 #app {
