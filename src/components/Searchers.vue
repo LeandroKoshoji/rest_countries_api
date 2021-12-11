@@ -15,7 +15,7 @@
     </form>
     <div class="filter-container" :class="theme">
       <select name="region" id="region" :class="theme" v-model="filter">
-        <option value="" selected>Filter by region</option>
+        <option value="" selected>All</option>
         <option value="Africa">África</option>
         <option value="Americas">Américas</option>
         <option value="Asia">Asia</option>
@@ -40,7 +40,7 @@ export default {
   computed: {
     query: {
       get(){
-        return this.$store.state.query
+        return this.$store.state.countries.query
       },
       set(value) {
         this.$store.commit('SET_QUERY', value)
@@ -48,7 +48,7 @@ export default {
     },
     filter: {
       get(){
-        return this.$store.state.filter
+        return this.$store.state.countries.filter
       },
       set(value) {
         this.$store.commit('SET_FILTER', value)
@@ -58,7 +58,8 @@ export default {
   created() {
     this.$store.commit('SET_QUERY', '')
     this.$store.commit('SET_FILTER', '')
-  }
+  },
+
 };
 </script>
 
